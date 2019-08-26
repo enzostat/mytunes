@@ -4,6 +4,7 @@ const layouts = require('express-ejs-layouts');
 require('dotenv').config();
 const flash = require('connect-flash');
 const session = require('express-session');
+const db = require('./models')
 // const passport = require('./config/passportConfig');
 
 //instantiate the express app
