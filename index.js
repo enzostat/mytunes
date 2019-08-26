@@ -4,7 +4,8 @@ const layouts = require('express-ejs-layouts');
 require('dotenv').config();
 const flash = require('connect-flash');
 const session = require('express-session');
-const db = require('./models')
+const db = require('./models');
+const axios = require('axios');
 // const passport = require('./config/passportConfig');
 
 //instantiate the express app
@@ -35,7 +36,9 @@ app.get('/', (req,res) => {
     res.render('index')
 })
 
-app.get('/*')
+app.get('/*', (req,res) => {
+    res.send('404 - bad gateway')
+})
 
 
 

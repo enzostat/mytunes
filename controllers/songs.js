@@ -7,13 +7,14 @@ router.get('/', (req,res) => {
     res.render('songs/index')
 })
 
+router.get('/new', (req,res) => {
+    res.render('songs/new')
+})
 
 router.get('/:id', (req,res) => {
     res.render('songs/show')
 })
 
-router.get('/new', (req,res) => {
-    res.render('songs/new')
-})
+
 
 module.exports = router;
