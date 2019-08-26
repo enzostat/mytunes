@@ -25,9 +25,7 @@ function playFetch(){
     .then(function(jsonData) {
         console.log(jsonData);
         // jsonData.forEach(function(results) {
-            
         //     console.log(results)
-
         //         // document.getElementById("container-div").append(catPic);
         // })
     })
