@@ -32,7 +32,7 @@ app.use('/songs', require('./controllers/songs'))
 
 
 app.get('/', (req,res) => {
-    res.send('STUB - home page')
+    res.render('index')
 })
 
 app.get('/*')
