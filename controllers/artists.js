@@ -8,9 +8,9 @@ router.get('/', (req,res) => {
 })
 
 router.get('/new', (req,res) => {
+    var url = ""
     res.render('artists/new')
 })
-
 
 router.get('/:id', (req,res) => {
     res.render('artists/show')

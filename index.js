@@ -37,7 +37,7 @@ app.get('/', (req,res) => {
 })
 
 app.get('/*', (req,res) => {
-    res.send('404 - bad gateway')
+    res.render('404')
 })
 
 
