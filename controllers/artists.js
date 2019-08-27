@@ -6,7 +6,15 @@ const axios = require('axios');
 
 
 router.get('/', (req,res) => {
-    res.render('artists/index')
+    
+    db.user.findByPk(req.user.id, {include: [db.artist]})
+    .then(function(user) {
+        res.render('artists/index', {user})
+    })
+    .catch(err => {
+        console.log(err)
+    })
+    
 })
 
 router.get('/new', (req,res) => {
@@ -50,6 +58,8 @@ router.post('/new/results', (req,res) => {
 })
 
 router.get('/:id', (req,res) => {
+    db.artist.findOne({where: {id: req.params.id} })
+    .then()
     res.render('artists/show')
 })
 
