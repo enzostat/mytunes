@@ -1,28 +1,32 @@
 <nav>
 	<ul>
-		
+		<% if (currentUser && currentUser.firstname) {%>
 		<li>
-            <a href="/">Home</a>
-        </li>
+			<a href="/artists">Welcome Back <%= currentUser.firstname%>!</a>
+		</li>
+
+		<% }%>
+		<li>
+			<a href="/">Home</a>
 		
 	</ul>
 	<ul>
-	
+		<% if (currentUser) {%>
 		<li>
-			<a href="/profile">Profile</a>
+			<a href="/artists">Profile</a>
 		</li>
 		
 		<li>
 			<a href="/auth/logout">Logout</a>
 		</li>
-		
+		<% } else {%>
 		<li>
 			<a href="/auth/signup">Sign Up</a>
 		</li>
 		<li>
 			<a href="/auth/login">Log-in</a>
 		</li>
-	
+		<% } %>
 		
 	</ul>
 

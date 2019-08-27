@@ -65,7 +65,7 @@ router.get('/login', (req,res) => {
 })
 
 router.post('/login', passport.authenticate('local', {
-	successRedirect: '/profile',
+	successRedirect: '/artists',
 	successFlash: 'Yay you logged in successfully!',
 	failureRedirect: '/auth/login',
 	failureFlash: 'Invalid Credentials!'
@@ -73,7 +73,9 @@ router.post('/login', passport.authenticate('local', {
 
 
 router.get('/logout', (req,res) => {
-    res.render('auth/logout')
+	req.logout(); //deletes the user from req.user
+	req.flash('success', 'Goodbye - See you next time!');
+	res.redirect('/')
 })
 
 

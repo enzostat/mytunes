@@ -29,6 +29,25 @@ router.get('/new/results', (req,res) => {
     })
 })
 
+router.post('/new/results', (req,res) => {
+    let userId = req.user.id;
+    console.log(userId)
+    db.artist.findOrCreate({
+        where: {name: req.body.name},
+        defaults: req.body
+    }).spread((artist, created => {
+        if (travelerId > 0) {
+            db.user.findByPk(userId)
+            .then(user => {
+                artist.addUser(user)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        }
+    }))
+})
+
 router.get('/:id', (req,res) => {
     res.render('artists/show')
 })
