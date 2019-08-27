@@ -31,12 +31,12 @@ router.get('/new/results', (req,res) => {
 
 router.post('/new/results', (req,res) => {
     let userId = req.user.id;
-    console.log(userId)
+    
     db.artist.findOrCreate({
-        where: {name: req.body.name},
-        defaults: req.body
-    }).spread((artist, created => {
-        if (travelerId > 0) {
+        where: {name: req.body.name}
+        // defaults: req.body
+    }).spread((artist, created) => {
+        if (userId > 0) {
             db.user.findByPk(userId)
             .then(user => {
                 artist.addUser(user)
@@ -45,7 +45,8 @@ router.post('/new/results', (req,res) => {
                 console.log(err)
             })
         }
-    }))
+        res.redirect('/artists')
+    })
 })
 
 router.get('/:id', (req,res) => {

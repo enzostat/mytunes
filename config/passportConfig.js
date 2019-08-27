@@ -32,7 +32,7 @@ passport.use(new LocalStrategy({
 	})
 	.then(foundUser => {
 		console.log('got a user');
-		console.log(typedInEmail,typedInPassword);
+		
 		//if i did not find a user with that email -OR-
 		//if i did find a user but they don't have the correct password
 		if (!foundUser || !foundUser.validPassword(typedInPassword)) {
