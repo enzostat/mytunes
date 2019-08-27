@@ -27,7 +27,7 @@ app.use(flash()); //after session
 // app.use(passport.session());
 
 //routes
-// app.use('/auth', require('./controllers/auth'));
+app.use('/auth', require('./controllers/auth'));
 app.use('/artists', require('./controllers/artists'))
 app.use('/songs', require('./controllers/songs'))
 
