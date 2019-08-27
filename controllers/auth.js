@@ -3,6 +3,7 @@ const db = require('../models');
 require('dotenv').config();
 const axios = require('axios');
 const flash = require('connect-flash')
+const passport = require('../config/passportConfig')
 
 
 router.get('/', (req,res) => {
@@ -62,6 +63,13 @@ router.post('/signup', (req,res, next) => {
 router.get('/login', (req,res) => {
     res.render('auth/login')
 })
+
+router.post('/login', passport.authenticate('local', {
+	successRedirect: '/profile',
+	successFlash: 'Yay you logged in successfully!',
+	failureRedirect: '/auth/login',
+	failureFlash: 'Invalid Credentials!'
+}))
 
 
 router.get('/logout', (req,res) => {

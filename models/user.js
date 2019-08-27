@@ -4,11 +4,35 @@ const bcrypt = require('bcryptjs')
 
 module.exports = (sequelize, DataTypes) => {
   const user = sequelize.define('user', {
-    email: DataTypes.STRING,
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isEmail: {
+          msg: 'Please provide a valid email address'
+        }
+      }
+    }, 
     username: DataTypes.STRING,
-    firstname: DataTypes.STRING,
+    firstname: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Please provide your first name'
+        }
+      }
+    }, 
     lastname: DataTypes.STRING,
-    password: DataTypes.STRING
+    password: {
+      type: DataTypes.STRING,
+      validate: {
+        len: {
+          args: [8,32],
+          msg: 'Your password should be between 8 and 32 characters'
+        }
+      }
+    } 
   }, {
     hooks: {
       beforeCreate: (pendingUser) => {
