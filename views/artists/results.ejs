@@ -1,0 +1,17 @@
+<div class="container">
+    <h1 class="text-center">Search Results </h1>
+    <p class="text-center">
+      <a href="/pokemon">Favorites</a>
+    </p>
+  
+    <% results.artistmatches.artist.forEach(function(a) { %>
+      <div class="well">
+        <h2><%= a.name %></h2>
+        <form method="POST" action="/pokemon">
+          <input hidden type="text" name="name" value="<%= a.name %>">
+          <button class="btn btn-primary" type="submit">Add to Favorite Artists</button>
+        </form>
+      </div>
+    <% }); %>
+  </div>
+  
