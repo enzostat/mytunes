@@ -2,6 +2,7 @@ const router = require('express').Router();
 const db = require('../models');
 require('dotenv').config();
 const axios = require('axios');
+const isLoggedIn = require('../middleware/isLoggedIn');
 
 
 
@@ -88,6 +89,10 @@ router.get('/:id/toptracks', (req,res) => {
 
     })
 
+})
+
+router.get('/*', (req,res) => {
+    res.render('404')
 })
 
 

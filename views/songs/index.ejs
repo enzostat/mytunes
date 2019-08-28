@@ -1,1 +1,11 @@
-<h1>Song Index</h1>
+<h1>Favorite Songs</h1>
+
+<ul>
+    <% songs.forEach(s => { %>
+        <li>
+        <%= s.name%> - <%=s.artist.name%>
+        </li>
+
+   <% })%>
+</ul>
+

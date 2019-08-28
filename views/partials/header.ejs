@@ -4,10 +4,17 @@
 		<li>
 			<a href="/artists">Welcome Back <%= currentUser.firstname%>!</a>
 		</li>
+		<li>
+			<a href="/artists/new">New Artists</a>
+		</li>
+		<li>
+			<a href="/songs">Your Songs</a>
+		</li>
 
-		<% }%>
+		<% } else {%>
 		<li>
 			<a href="/">Home</a>
+		<%}%>
 		
 	</ul>
 	<ul>

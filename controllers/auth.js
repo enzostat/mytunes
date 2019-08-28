@@ -28,7 +28,7 @@ router.post('/signup', (req,res, next) => {
 			if (wasCreated) {
 				//this was legitimately a new user so they got created
 				passport.authenticate('local', {
-					successRedirect: '/profile',
+					successRedirect: '/',
 					successFlash: 'Successful sign up. Welcome!',
 					failureRedirect: '/auth/login',
 					failureFlash: 'This should never happen. Contact your administrator.'
