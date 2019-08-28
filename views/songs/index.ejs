@@ -3,7 +3,7 @@
 <ul>
     <% songs.forEach(s => { %>
         <li>
-        <%= s.name%> - <%=s.artist.name%>
+        <a href="/songs/<%=s.id%>"><%= s.name%> - <%=s.artist.name%></a>
         </li>
 
    <% })%>

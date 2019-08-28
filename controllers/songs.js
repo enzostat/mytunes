@@ -1,10 +1,11 @@
 const router = require('express').Router();
 const db = require('../models');
 const isLoggedIn = require('../middleware/isLoggedIn');
+const axios = require('axios')
 
 
 
-router.get('/', (req,res) => {
+router.get('/', isLoggedIn, (req,res) => {
     db.user.findOne({
         where: { id: req.user.id }, 
         include: [db.artist, {
@@ -51,7 +52,21 @@ router.get('/new', (req,res) => {
 })
 
 router.get('/:id', (req,res) => {
-    res.render('songs/show')
+    db.song.findOne({
+        where: {id: req.params.id},
+        include: [db.artist]
+    })
+    .then(song => {
+        var url = "https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=" +process.env.api_key +"&artist="+ song.artist.name+"&track="+ song.name+"&format=json";
+        console.log(url)
+        axios.get(url)
+        .then(response => {
+            var results = response.data
+            res.render('songs/show', {results, song})
+        })
+
+    })
+    
 })
 
 router.get('/*', (req,res) => {

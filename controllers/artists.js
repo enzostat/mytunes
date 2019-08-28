@@ -6,7 +6,7 @@ const isLoggedIn = require('../middleware/isLoggedIn');
 
 
 
-router.get('/', (req,res) => {
+router.get('/',isLoggedIn, (req,res) => {
     
     db.user.findByPk(req.user.id, {include: [db.artist]})
     .then(function(user) {
@@ -18,7 +18,7 @@ router.get('/', (req,res) => {
     
 })
 
-router.get('/new', (req,res) => {
+router.get('/new', isLoggedIn, (req,res) => {
     var url = ""
     res.render('artists/new')
 })
@@ -58,7 +58,7 @@ router.post('/new/results', (req,res) => {
     })
 })
 
-router.get('/:id', (req,res) => {
+router.get('/:id', isLoggedIn, (req,res) => {
     db.artist.findOne({where: {id: req.params.id} })
     .then(artist => {
         var url = "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist="+artist.name+"&api_key="+process.env.api_key+"&format=json"
