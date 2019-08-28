@@ -1,10 +1,14 @@
 <h1><%= artist.name%>'s Top Tracks</h1>
 
-<ol>
     <% results.toptracks.track.forEach(tt => {%>
-        <li>
-            <%= tt.name%>
-        </li>
+        <div class="well">
+        <h2><%= tt.name %></h2>
+        <form method="POST" action="/songs">
+          <input hidden type="text" name="name" value="<%= tt.name %>">
+          <input hidden type="text" name="artistId" value="<%= artist.id%>">
+          
+          <button class="btn btn-primary" type="submit">Add to Favorite Songs</button>
+        </form>
+      </div>
     <%})%>
 
-</ol>
