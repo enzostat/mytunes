@@ -1,1 +1,22 @@
-<h1>Artist Show Page</h1>
+<h1><%=results.artist.name%></h1>
+
+<img src="<%= results.artist.image[1]["#text"]%>">
+
+<p><%= results.artist.bio.summary%></p>
+
+<a href="/artists/<%=artist.id%>/toptracks">Top Tracks</a>
+
+<h3>Related Artists:</h3>
+
+<ul>
+
+    <% results.artist.similar.artist.forEach(a => { %>
+
+    <li>
+    <%= a.name %>    
+    </li>
+
+    <% }) %>
+
+</ul>
+

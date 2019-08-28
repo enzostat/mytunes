@@ -1,0 +1,10 @@
+<h1><%= artist.name%>'s Top Tracks</h1>
+
+<ol>
+    <% results.toptracks.track.forEach(tt => {%>
+        <li>
+            <%= tt.name%>
+        </li>
+    <%})%>
+
+</ol>

@@ -24,7 +24,7 @@ router.get('/new', (req,res) => {
 
 router.get('/new/results', (req,res) => {
     var query = req.query;
-    var url = "https://ws.audioscrobbler.com/2.0/?method=artist.search&artist="+query.name+"&api_key="+process.env.api_key+"&format=json"
+    var url = "https://ws.audioscrobbler.com/2.0/?method=artist.search&artist="+query.name+"&limit=10&api_key="+process.env.api_key+"&format=json"
    console.log(url)
     axios.get(url)
     .then(response => {
@@ -59,8 +59,35 @@ router.post('/new/results', (req,res) => {
 
 router.get('/:id', (req,res) => {
     db.artist.findOne({where: {id: req.params.id} })
-    .then()
-    res.render('artists/show')
+    .then(artist => {
+        var url = "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist="+artist.name+"&api_key="+process.env.api_key+"&format=json"
+        console.log(url)
+        axios.get(url)
+        .then(response => {
+            var results = response.data;
+            res.render('artists/show', {results, artist})
+        })
+        .catch(err => {
+            console.log(err)
+            res.send('whoops bro')
+        })
+        
+    })
+    
+})
+
+router.get('/:id/toptracks', (req,res) => {
+    db.artist.findOne({where: {id: req.params.id}})
+    .then(artist => {
+        var url = "https://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist="+artist.name+"&limit=15&api_key="+process.env.api_key+"&format=json"
+        axios.get(url)
+        .then(response => {
+            var results = response.data;
+            res.render('artists/toptracks', {results, artist})
+        })
+
+    })
+
 })
 
 
