@@ -1,0 +1,27 @@
+<h1>Hello <%= user.firstname%></h1>
+
+<h3>Your Favorite Artists</h3>
+<ul>
+<% user.artists.forEach(a => {%>
+<li>
+<%=a.name%>
+</li>
+
+<%})%>
+</ul>
+
+<h3>Your Favorite Songs</h3>
+
+<ul>
+<% user.songs.forEach(s => { %>
+
+    <li>
+    <%= s.name%>    
+    </li>
+
+
+<%})%>
+</ul>
+
+<a href="/profile/firstname">I need to change my first name</a>
+<a href="/profile/lastname">I need to change my last name</a>
