@@ -43,8 +43,9 @@ app.use((req,res, next) => {
 
 //routes
 app.use('/auth', require('./controllers/auth'));
-app.use('/artists', require('./controllers/artists'))
-app.use('/songs', require('./controllers/songs'))
+app.use('/artists', require('./controllers/artists'));
+app.use('/songs', require('./controllers/songs'));
+app.use('/profile', require('./controllers/profile'));
 
 
 app.get('/', (req,res) => {

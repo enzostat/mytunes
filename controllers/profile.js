@@ -1,11 +1,12 @@
-const router = require('express').Router;
+const router = require('express').Router();
 const db = require('../models');
 require('dotenv').config();
 const axios = require('axios');
 const isLoggedIn = require('../middleware/isLoggedIn');
 
 
-router.get('/', isLoggedIn,(req,res) => {
+router.get('/', isLoggedIn, (req,res) => {
+    
     db.user.findByPk(req.user.id, {include: [db.artist,db.song]})
     .then(user => {
         res.render('profile', {user})
@@ -16,9 +17,17 @@ router.get('/', isLoggedIn,(req,res) => {
     })
 })
 
+router.get('/firstname', (req,res) => {
+    res.render('profile/firstname')
+})
+
+router.get('/lastname', (req,res) => {
+    res.render('profile/lastname')
+})
+
 router.put('/firstname', (req,res) => {
     let newName = req.body.firstname
-    db.user.save({firstname: newName}, {where: {id: req.user.id}})
+    db.user.update({firstname: newName}, {where: {id: req.user.id}})
     .then(() => {
         res.redirect('/profile')
     })
@@ -30,7 +39,7 @@ router.put('/firstname', (req,res) => {
 
 router.put('/lastname', (req,res) => {
     let newName = req.body.lastname
-    db.user.save({lastname: newName}, {where: {id: req.user.id}})
+    db.user.update({lastname: newName}, {where: {id: req.user.id}})
     .then(() => {
         res.redirect('/profile')
     })
