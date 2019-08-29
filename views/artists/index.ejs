@@ -1,10 +1,21 @@
-<h1>Artist Index</h1>
-<ul>
+<div class="show-div">
+<h1>Favorite Artists</h1>
+
 <% user.artists.forEach(a => {%>
-    <li>
-        <a href="/artists/<%=a.id%>"><%= a.name%></a>
-    </li>
+    <div>
+        <p>
+            <a href="/artists/<%=a.id%>"><%= a.name%></a>
+        </p>
+        <form method="POST" action="/artists/<%=a.id%>?_method=DELETE">
+            <input hidden type="text" name="artistId" value="<%= a.id%>">
+            <input type="submit" value="Delete from Favorites">
+        </form>
+
+    </div>
+    
 
 <%})%>
-</ul>
+<br>
 <a href="/artists/new">Add new artists</a>
+
+</div>

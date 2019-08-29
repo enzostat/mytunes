@@ -8,6 +8,7 @@ const db = require('./models');
 const axios = require('axios');
 const passport = require('./config/passportConfig');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const methodOverride = require('method-override'); 
 
 //instantiate the express app
 const app = express();
@@ -31,6 +32,7 @@ sessionStore.sync();
 app.use(flash()); //after session
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(methodOverride('_method'))
 
 //Custom middleware: write data to locals for EVERY page
 app.use((req,res, next) => {

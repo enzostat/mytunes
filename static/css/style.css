@@ -1,7 +1,9 @@
 html, body {
     margin: 0;
-    padding: 0;
+    /* padding: 0; */
     font-family: 'Roboto', sans-serif;
+    padding-bottom: 50px;
+    margin-bottom: 100px;
 }
 
 nav {
@@ -31,9 +33,10 @@ nav a:hover {
     color: chartreuse;
 }
 
-form {
+.credentials-form {
     font-family: 'Roboto', sans-serif;
-    font-size: 18px;
+    font-size: 24px;
+    /* color: white; */
     display: flex;
     flex-direction: column;
     min-height: 30vh;
@@ -51,10 +54,12 @@ form {
     max-width: 50%;
     margin: 10px 0px;
     padding: 1%;
+
 }
 
 .credentials-form input[type=submit] {
     max-width: 75px;
+    background-color: white;
 }
 
 .error-box {
@@ -92,18 +97,45 @@ footer {
     background-color: rebeccapurple;
     font-size: 32px;
     color: white;
-    padding: 10px;
+    padding-top: -20px;
     position: fixed;
     bottom: 0;
     width: 100%;
     text-align: center;
+    margin-top: 20px;
 
 }
 
-#home-page {
+.show-div {
+    text-align: center;
+}
+.show-div ul li {
+    text-align: center;
+    list-style-type: none;
+    font-size: 36px;
+}
+
+.show-div a {
+    text-decoration: none;
+    color: black;
+}
+
+.show-div a:visited {
+    color: black;
+}
+
+.show-div a:hover {
+    cursor: pointer;
+}
+
+.container {
+    margin-bottom: 200px;
+}
+
+/* #home-page {
     background-image: url('../../images/headphones-690685_1920.jpg');
     background-size: contain;
-}
+} */
 
 
 

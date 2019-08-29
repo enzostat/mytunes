@@ -18,6 +18,7 @@ router.get('/',isLoggedIn, (req,res) => {
     
 })
 
+
 router.get('/new', isLoggedIn, (req,res) => {
     var url = ""
     res.render('artists/new')
@@ -58,6 +59,22 @@ router.post('/new/results', (req,res) => {
     })
 })
 
+router.delete('/:id', (req,res) => {
+    var aId = req.body.artistId;
+    // var userId = req.user.id;
+
+    db.usersArtists.destroy({
+        where: {userId: req.user.id, artistId: aId}
+    })
+    .then(() => {
+        res.redirect('/artists')
+    })
+    .catch(err => {
+        res.send('something went wrong')
+    })
+
+})
+
 router.get('/:id', isLoggedIn, (req,res) => {
     db.artist.findOne({where: {id: req.params.id} })
     .then(artist => {
@@ -76,6 +93,8 @@ router.get('/:id', isLoggedIn, (req,res) => {
     })
     
 })
+
+
 
 router.get('/:id/toptracks', (req,res) => {
     db.artist.findOne({where: {id: req.params.id}})
