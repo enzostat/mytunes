@@ -1,0 +1,15 @@
+<h1>Search Results:</h1>
+
+
+<% results.trackmatches.track.forEach(function(s) { %>
+    <div class="well">
+      <h2><%= s.name %></h2>
+      <form method="POST" action="/songs">
+        <input hidden type="text" name="name" value="<%= s.name %>">
+        <input hidden type="text" name="artistId" value="<%= artist.id%>">
+        
+        <button class="btn btn-primary" type="submit">Add to Favorite Songs</button>
+      </form>
+    </div>
+  <% }); %>
+</div>

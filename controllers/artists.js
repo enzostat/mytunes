@@ -91,6 +91,20 @@ router.get('/:id/toptracks', (req,res) => {
 
 })
 
+router.get('/:id/songsearch', (req,res) => {
+    var query = req.query;
+    db.artist.findOne({where: {id: req.params.id}})
+    .then(artist => {
+        var url = "https://ws.audioscrobbler.com/2.0/?method=track.search&track="+query.name+"&artist="+ artist.name +"&limit=10&api_key="+process.env.api_key+"&format=json";
+        axios.get(url)
+        .then(response => {
+            var results = response.data.results;
+            // res.json(results)
+            res.render('artists/songsearch', {results, artist})
+        })
+    })
+})
+
 router.get('/*', (req,res) => {
     res.render('404')
 })

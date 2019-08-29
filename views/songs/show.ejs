@@ -1,8 +1,10 @@
 <h1><%=results.track.name%></h1>
 <h4>Artist: <%= results.track.artist.name%></h4>
 
+<%if (results.track.album) {%>
 <img src="<%= results.track.album.image[2]['#text']%>">
 <h5>Album: <%=results.track.album.title%></h5>
+<%}%>
 
 <%if (results.track.wiki) {%>
 <p><%= results.track.wiki.summary%></p>
