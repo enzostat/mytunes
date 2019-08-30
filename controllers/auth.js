@@ -7,7 +7,7 @@ const passport = require('../config/passportConfig')
 
 
 router.get('/', (req,res) => {
-    res.send('STUB - auth pafe')
+    res.redirect('/auth/login')
 })
 
 router.get('/signup', (req,res) => {

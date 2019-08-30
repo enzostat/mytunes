@@ -14,6 +14,7 @@ router.get('/',isLoggedIn, (req,res) => {
     })
     .catch(err => {
         console.log(err)
+        res.redirect('/*')
     })
     
 })
@@ -35,7 +36,7 @@ router.get('/new/results', (req,res) => {
     })
     .catch(err => {
         console.log(err)
-        res.redirect('../../*')
+        res.redirect('/*')
     })
 })
 
@@ -53,6 +54,7 @@ router.post('/new/results', (req,res) => {
             })
             .catch(err => {
                 console.log(err)
+                res.redirect('/*')
             })
         }
         res.redirect('/artists')
@@ -70,7 +72,7 @@ router.delete('/:id', (req,res) => {
         res.redirect('/artists')
     })
     .catch(err => {
-        res.send('something went wrong')
+        res.redirect('/*')
     })
 
 })
@@ -118,7 +120,6 @@ router.get('/:id/songsearch', (req,res) => {
         axios.get(url)
         .then(response => {
             var results = response.data.results;
-            // res.json(results)
             res.render('artists/songsearch', {results, artist})
         })
     })

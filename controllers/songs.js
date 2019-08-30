@@ -18,7 +18,7 @@ router.get('/', isLoggedIn, (req,res) => {
     })
     .catch(err => {
         console.log(err)
-        res.send('error')
+        res.redirect('/*')
     })
     
 })
@@ -40,7 +40,7 @@ router.post('/', (req,res) => {
             })
             .catch(err => {
                 console.log(err)
-                res.send('something went wrong')
+                res.redirect('/*')
             })
         }
         res.redirect('/songs')
@@ -63,6 +63,10 @@ router.get('/:id', (req,res) => {
         .then(response => {
             var results = response.data
             res.render('songs/show', {results, song})
+        })
+        .catch(err => {
+            console.log(err)
+            res.redirect('/*')
         })
 
     })

@@ -13,7 +13,7 @@ router.get('/', isLoggedIn, (req,res) => {
     })
     .catch(err => {
         console.log(err);
-        res.send('something went wrong')
+        res.redirect('/*')
     })
 })
 
