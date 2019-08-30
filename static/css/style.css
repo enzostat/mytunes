@@ -108,6 +108,8 @@ footer {
 
 .show-div {
     text-align: center;
+    margin-bottom: 200px;
+
 }
 .show-div ul li {
     text-align: center;
@@ -116,7 +118,7 @@ footer {
 }
 
 .show-div a {
-    text-decoration: none;
+    /* text-decoration: none; */
     color: black;
 }
 
@@ -132,10 +134,9 @@ footer {
     margin-bottom: 200px;
 }
 
-/* #home-page {
-    background-image: url('../../images/headphones-690685_1920.jpg');
-    background-size: contain;
-} */
+
+
+
 
 
 

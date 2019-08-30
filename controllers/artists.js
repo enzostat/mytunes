@@ -85,7 +85,23 @@ router.get('/:id', isLoggedIn, (req,res) => {
         axios.get(url)
         .then(response => {
             var results = response.data;
-            res.render('artists/show', {results, artist})
+            let mbid = results.artist.mbid;
+            let onTour = results.artist.ontour;
+
+            if (onTour == 1) {
+                let songkickURL = `https://api.songkick.com/api/3.0/artists/mbid:${mbid}/calendar.json?apikey=${process.env.songkick_api}&page=1&per_page=5 `;
+                console.log(songkickURL);
+
+                axios.get(songkickURL)
+                .then(response => {
+                    let skResults = response.data;
+                    // res.json(skResults);
+                    res.render('artists/show', {results, skResults, artist})
+                })
+            } else {
+                res.render('artists/show', {results, artist})
+            }
+            // res.render('artists/show', {results, artist})
         })
         .catch(err => {
             console.log(err)

@@ -17,6 +17,25 @@
 
 </form>
 
+
+
+<% if (results.artist.ontour == 1) { %>
+    
+    <p><%= results.artist.name%> is on tour!</p>
+    <%skResults.resultsPage.results.event.forEach(e => {%>
+    <span class="concert-span"> 
+        <p><%= e.displayName%></p>
+        <a href="<%= e.uri%>">Buy tickets!</a>
+        <p><%=e.venue.metroArea.displayName%></p>
+    </span>
+    <%})%>
+
+    
+<%} else { %>
+<p><%= results.artist.name%> is not currently on tour. Check back soon!</p>
+<% } %>
+
+
 <h3>Related Artists:</h3>
 
 <ul>
@@ -30,6 +49,8 @@
     <% }) %>
 
 </ul>
+
+
 
 </div>
 
