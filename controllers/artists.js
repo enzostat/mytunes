@@ -42,12 +42,14 @@ router.get('/new/results', (req,res) => {
 
 router.post('/new/results', (req,res) => {
     let userId = req.user.id;
-    
+    //either find an artist in the DB or create one
     db.artist.findOrCreate({
         where: {name: req.body.name}
-        // defaults: req.body
+        
     }).spread((artist, created) => {
         if (userId > 0) {
+            //once artist is either found or created, the current user is found
+            //and an entry in the join table is created
             db.user.findByPk(userId)
             .then(user => {
                 artist.addUser(user)
@@ -63,8 +65,9 @@ router.post('/new/results', (req,res) => {
 
 router.delete('/:id', (req,res) => {
     var aId = req.body.artistId;
-    // var userId = req.user.id;
 
+    //find where user and artist are joined and delete that entry
+    //does not delete either user or artist
     db.usersArtists.destroy({
         where: {userId: req.user.id, artistId: aId}
     })
@@ -80,14 +83,20 @@ router.delete('/:id', (req,res) => {
 router.get('/:id', isLoggedIn, (req,res) => {
     db.artist.findOne({where: {id: req.params.id} })
     .then(artist => {
+        //start of api process
+        //api is called used artist name and the info is then displayed on the show page
         var url = "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist="+artist.name+"&api_key="+process.env.api_key+"&format=json"
         console.log(url)
         axios.get(url)
         .then(response => {
             var results = response.data;
+            //every artist has an mbid
+            //the mbid string will be used to find artist in songkick's api
             let mbid = results.artist.mbid;
             let onTour = results.artist.ontour;
 
+            //if an artist is on tour, the last.fm api list their "ontour" status as 1
+            //using that, if an artist is on tour, we do a second api call to songkick
             if (onTour == 1) {
                 let songkickURL = `https://api.songkick.com/api/3.0/artists/mbid:${mbid}/calendar.json?apikey=${process.env.songkick_api}&page=1&per_page=5 `;
                 console.log(songkickURL);
@@ -98,10 +107,11 @@ router.get('/:id', isLoggedIn, (req,res) => {
                     // res.json(skResults);
                     res.render('artists/show', {results, skResults, artist})
                 })
+            //if an artist is not on tour, there is no need to make the songkick call
             } else {
                 res.render('artists/show', {results, artist})
             }
-            // res.render('artists/show', {results, artist})
+        
         })
         .catch(err => {
             console.log(err)
