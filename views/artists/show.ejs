@@ -10,7 +10,7 @@
 
 <h3>Song Search:</h3>
 
-<form method="GET" action="/artists/<%=artist.id%>/songsearch">
+<form class="credentials-form" method="GET" action="/artists/<%=artist.id%>/songsearch">
     <input hidden type="text" name="artistId" value="<%= artist.id%>">
     <input type="text" name="name" id="query">
     <input type="submit" id="search-button">
