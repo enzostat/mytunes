@@ -4,7 +4,7 @@ require('dotenv').config();
 const axios = require('axios');
 const isLoggedIn = require('../middleware/isLoggedIn');
 
-
+//shows an user's profile
 router.get('/', isLoggedIn, (req,res) => {
     
     db.user.findByPk(req.user.id, {include: [db.artist,db.song]})
@@ -17,14 +17,17 @@ router.get('/', isLoggedIn, (req,res) => {
     })
 })
 
+//change first name form
 router.get('/firstname', (req,res) => {
     res.render('profile/firstname')
 })
 
+//change last name form
 router.get('/lastname', (req,res) => {
     res.render('profile/lastname')
 })
 
+//route to change name
 router.put('/firstname', (req,res) => {
     let newName = req.body.firstname
     db.user.update({firstname: newName}, {where: {id: req.user.id}})
@@ -37,6 +40,7 @@ router.put('/firstname', (req,res) => {
     })
 })
 
+//route to change last name
 router.put('/lastname', (req,res) => {
     let newName = req.body.lastname
     db.user.update({lastname: newName}, {where: {id: req.user.id}})

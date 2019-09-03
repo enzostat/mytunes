@@ -123,7 +123,7 @@ router.get('/:id', isLoggedIn, (req,res) => {
 })
 
 
-
+//find the top tracks of an artist, a quick add method (if you will)
 router.get('/:id/toptracks', (req,res) => {
     db.artist.findOne({where: {id: req.params.id}})
     .then(artist => {
@@ -138,6 +138,7 @@ router.get('/:id/toptracks', (req,res) => {
 
 })
 
+//search for a specific song by an artist
 router.get('/:id/songsearch', (req,res) => {
     var query = req.query;
     db.artist.findOne({where: {id: req.params.id}})
